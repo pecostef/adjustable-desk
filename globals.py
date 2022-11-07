@@ -1,5 +1,5 @@
 from machine import Pin 
-from deskmotormock import DeskMotor
+from deskmotor import DeskMotor
 from pinconfig import LimitSwitchesPinConfig, MotorButtonsPinConfig
 from state import ActiveState, MotorLimitsState, MotorButtonsState
 led = Pin("LED", Pin.OUT)
@@ -11,5 +11,5 @@ limits_state = MotorLimitsState(limit_switches_pin_config)
 buttons_state = MotorButtonsState(buttons_pin_config)
 active_state = ActiveState(INACTIVE_UNTIL_SLEEP_MS)
 
-desk_motor = DeskMotor(21, 20)
+desk_motor = DeskMotor(pwm_pin=16, dir_pin=17)
 

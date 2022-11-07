@@ -12,7 +12,7 @@ class DeskMotor():
         self.__DUTY_CYCLE_10_U16 = 6554
         self.__DUTY_CYCLE_0_U16 = 0
         self.__pwm_pin = PWM(Pin(pwm_pin))
-        self.__dir_pin = Pin(dir_pin)
+        self.__dir_pin = Pin(dir_pin, Pin.OUT)
 
         self.__pwm_pin.freq(1000)
         self.stop()
