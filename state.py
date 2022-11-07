@@ -1,6 +1,6 @@
 from machine import Pin
+from utime import ticks_ms, ticks_diff
 from pinconfig import LimitSwitchesPinConfig, MotorButtonsPinConfig
-from utime import sleep_ms, ticks_ms, ticks_diff
 
 class MotorLimitsState:
     def __init__(self, pin_config: LimitSwitchesPinConfig):
@@ -24,6 +24,9 @@ class MotorLimitsState:
     def limit_low_state(self, value):
         self._limit_low_state = value
 
+    def __str__(self) -> str:
+        return f'MotorLimits( limit_up_state={self.limit_up_state}, limit_low_state={self.limit_low_state})'
+
 class MotorButtonsState:
     def __init__(self, pin_config: MotorButtonsPinConfig):
         self._pin_config = pin_config
@@ -46,6 +49,9 @@ class MotorButtonsState:
     def btn_down_state(self, value):
         self._btn_down_state = value
 
+    def __str__(self) -> str:
+        return f'MotorButtonsState( btn_up_state={self.btn_up_state}, btn_down_state={self.btn_down_state})'
+
 
 class ActiveState:
     def __init__(self, inactive_timeout_ms) -> None:
@@ -58,3 +64,6 @@ class ActiveState:
     def is_active(self):
         diff = ticks_diff(ticks_ms(), self._last_start_or_interrupt_time)
         return  diff < self._inactive_timeout_ms
+
+    def __str__(self) -> str:
+        return f'ActiveState( is_active={self.is_active()}'
