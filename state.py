@@ -1,5 +1,4 @@
-from machine import Pin
-from utime import ticks_ms, ticks_diff
+from time import ticks_ms, ticks_diff
 from pinconfig import LimitSwitchesPinConfig, MotorButtonsPinConfig
 
 class MotorLimitsState:
