@@ -1,22 +1,22 @@
 from machine import Pin
-from  globals import buttons_pin_config, limits_state, buttons_state, active_state, desk_motor
+from  globals import buttons_pin_config, limit_state, buttons_state, active_state, desk_motor
 
 def motor_btn_up_INT(pin):
     global buttons_pin_config
-    global limits_state
+    global limit_state
     global buttons_state
     global active_state
     global desk_motor
     
     buttons_pin_config.btn_up_pin.irq(handler=None)
 
-    limit_upper_state =limits_state.limit_up_state
+    limit_state_value =limit_state.limit_state
     btn_up_state = buttons_state.btn_up_state
     btn_down_state = buttons_state.btn_down_state
     
     active_state.extend_active_state()
 
-    if(btn_down_state == 0 and limit_upper_state == 0):
+    if(btn_down_state == 0 and limit_state_value == 0):
         if(buttons_pin_config.btn_up_pin.value() == 1 and btn_up_state == 0):
             # btn_up from low => high
             buttons_state.btn_up_state = 1
@@ -29,20 +29,20 @@ def motor_btn_up_INT(pin):
 
 def motor_btn_down_INT(pin):
     global buttons_pin_config
-    global limits_state
+    global limit_state
     global buttons_state
     global active_state
     global desk_motor
     
     buttons_pin_config.btn_down_pin.irq(handler=None)
 
-    limit_lower_state = limits_state.limit_low_state
+    limit_state_value = limit_state.limit_state
     btn_down_state = buttons_state.btn_down_state
     btn_up_state = buttons_state.btn_up_state
     
     active_state.extend_active_state()
 
-    if(btn_up_state == 0 and limit_lower_state == 0):
+    if(btn_up_state == 0 and limit_state_value == 0):
         # ignore if another button is already being pressed or lower limit is reached
         if(buttons_pin_config.btn_down_pin.value() == 1 and btn_down_state == 0):
             # btn_down from low => high

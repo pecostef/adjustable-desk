@@ -4,12 +4,12 @@ import time
 import globals
 
 import motorbuttons
-import motorlimits
+import motorlimit
 
 try:
     while True:
         print(str(globals.buttons_state))
-        print(str(globals.limits_state))
+        print(str(globals.limit_state))
         sleep_ms(200)
 except OSError as exc:
     if exc.args[0] == errno.EAGAIN: 

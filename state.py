@@ -1,30 +1,21 @@
 from time import ticks_ms, ticks_diff
-from pinconfig import LimitSwitchesPinConfig, MotorButtonsPinConfig
+from pinconfig import MotorLimitPinConfig, MotorButtonsPinConfig
 
-class MotorLimitsState:
-    def __init__(self, pin_config: LimitSwitchesPinConfig):
+class MotorLimitState:
+    def __init__(self, pin_config: MotorLimitPinConfig):
         self._pin_config = pin_config
-        self._limit_up_state = pin_config.limit_up_pin.value()
-        self._limit_low_state = pin_config.limit_low_pin.value()
+        self._limit_state = pin_config.limit_pin.value()
 
     @property
-    def limit_up_state(self):
-        return self._limit_up_state
+    def limit_state(self):
+        return self._limit_state
     
-    @limit_up_state.setter
-    def limit_up_state(self, value):
-        self._limit_up_state = value
-
-    @property
-    def limit_low_state(self):
-        return self._limit_low_state
-
-    @limit_low_state.setter
-    def limit_low_state(self, value):
-        self._limit_low_state = value
+    @limit_state.setter
+    def limit_state(self, value):
+        self._limit_state = value
 
     def __str__(self) -> str:
-        return f'MotorLimits( limit_up_state={self.limit_up_state}, limit_low_state={self.limit_low_state})'
+        return f'MotorLimit(limit_state={self.limit_state})'
 
 class MotorButtonsState:
     def __init__(self, pin_config: MotorButtonsPinConfig):
